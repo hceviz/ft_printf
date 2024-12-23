@@ -6,7 +6,7 @@
 /*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:34:18 by hceviz            #+#    #+#             */
-/*   Updated: 2024/12/20 20:35:59 by hceviz           ###   ########.fr       */
+/*   Updated: 2024/12/23 16:34:40 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	print_ptr(void *ptr)
 	num = (uintptr_t)ptr;
 	if (num == 0)
 		return (print_c('0'));
-	write(1, '0', 1);
-	write(1, 'x', 1);
+	print_c('0');
+	print_c('x');
 	count = 2;
 	while (num > 0)
 	{

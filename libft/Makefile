@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hceviz <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/10 17:13:56 by hceviz            #+#    #+#              #
-#    Updated: 2024/12/10 17:58:27 by hceviz           ###   ########.fr        #
+#    Updated: 2024/12/23 16:14:09 by hceviz           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ bonus : $(NAME) $(OBJ_B)
 	$(AR) $(NAME) $(OBJ_B)
 	
 clean : 
-		rm -f *.o
+		rm -f $(OBJ) $(OBJ_B)
 
 fclean : clean
 		rm -f $(NAME)

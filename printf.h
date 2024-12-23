@@ -6,7 +6,7 @@
 /*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:40:50 by hceviz            #+#    #+#             */
-/*   Updated: 2024/12/20 20:35:57 by hceviz           ###   ########.fr       */
+/*   Updated: 2024/12/23 16:30:44 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <limits.h>
 # include "libft/libft.h"
 
+int	ft_printf(const char *flag, ...);
 int	print_ptr(void *ptr);
 int	print_d_i(int num);
 int	print_u(unsigned int num);
