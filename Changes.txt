@@ -1,2 +1,0 @@
-In libft's makefile, clean updated from rm -f *.o to rm -f $(OBJ) $(OBJ_B)
----------------------

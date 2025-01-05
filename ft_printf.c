@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*   By: hceviz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:38:25 by hceviz            #+#    #+#             */
-/*   Updated: 2024/12/23 16:33:42 by hceviz           ###   ########.fr       */
+/*   Updated: 2025/01/05 13:24:34 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include "libft/libft.h"
-#include <stdio.h>
+//#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <unistd.h>
 //be careful with argument promotion
 //promotion char to int
 // pointers cant be promoted
@@ -22,6 +24,7 @@ vvvvvvvvvvvvvv
  print_c(*s)
  s++;
  */
+
 int	print_s(char *s)
 {
 	int	count;
@@ -72,13 +75,11 @@ int	ft_printf(const char *flag, ...)
 			if (temp == -1)
 				return (-1);
 			count += temp;
-			flag++;
 		}
 		else
-		{
 			count += print_c((*flag));
-			flag++;
-		}
+		flag++;
 	}
-	return (1);
+	return (count);
 }
+

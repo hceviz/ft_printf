@@ -1,7 +1,10 @@
 {
 	"files.associations": {
+		"*.ndjson": "jsonl",
+		"*.dbclient-js": "javascript",
 		"printf.h": "c",
 		"libft.h": "c",
-		"stddef.h": "c"
+		"stddef.h": "c",
+		"stdio.h": "c"
 	}
 }

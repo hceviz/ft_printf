@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
+/*   By: hceviz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:34:18 by hceviz            #+#    #+#             */
-/*   Updated: 2024/12/23 16:34:40 by hceviz           ###   ########.fr       */
+/*   Updated: 2025/01/05 12:26:06 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
-#include "libft/libft.h"
 
 //print_both_x has an int flag
 //which specify is it upper or lower case
@@ -65,34 +64,28 @@ int	print_d_i(int num)
 
 int	print_u(unsigned int num)
 {
-	return (print_d_i(num));
+	int	written;
+
+	written = 0;
+	if (num >= 10)
+		written += print_u(num / 10);
+	written += print_c((num % 10) + '0');
+	return (written);
 }
+
 
 int	print_both_x(unsigned int num, unsigned int case_flag)
 {
-	int		count;
-	char	arr[50];
-	int		i;
+	char	*base;
+	int		written;
 
-	if (num == 0)
-		return (print_c('0'));
-	count = 0;
-	while (num > 0 && case_flag == 1)
-	{
-		arr[count] = "0123456789abcdef"[num % 16];
-		num /= 16;
-		count++;
-	}
-	while (num > 0 && case_flag == 0)
-	{
-		arr[count] = "0123456789ABCDEF"[num % 16];
-		num /= 16;
-		count++;
-	}
-	if (count == 0)
-		return (-1);
-	i = count;
-	while (i >= 0)
-		print_c(arr[i--]);
-	return (count);
+	written = 0;
+	if (case_flag == 1)
+		base = "0123456789abcdef";
+	else
+		base = "0123456789ABCDEF";
+	if (num >= 16)
+		written = print_both_x(num / 16, case_flag);
+	print_c(base[num % 16]);
+	return (written + 1);
 }
