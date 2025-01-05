@@ -5,6 +5,7 @@
 		"printf.h": "c",
 		"libft.h": "c",
 		"stddef.h": "c",
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"ft_printf.h": "c"
 	}
 }

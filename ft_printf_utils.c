@@ -6,18 +6,17 @@
 /*   By: hceviz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:34:18 by hceviz            #+#    #+#             */
-/*   Updated: 2025/01/05 12:26:06 by hceviz           ###   ########.fr       */
+/*   Updated: 2025/01/05 13:40:04 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
 //print_both_x has an int flag
 //which specify is it upper or lower case
 //it allows us to handle both case in one func
 // case_flag == 1 means that it is lower 0 means upper
 
-//check print_ptr is case sensitive
 //check print_both_x when to return -1
 int	print_ptr(void *ptr)
 {
