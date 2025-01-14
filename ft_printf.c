@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hceviz <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:38:25 by hceviz            #+#    #+#             */
-/*   Updated: 2025/01/05 13:47:44 by hceviz           ###   ########.fr       */
+/*   Updated: 2025/01/13 16:00:39 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 //#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <unistd.h>
+
 //be careful with argument promotion
 //promotion char to int
 // pointers cant be promoted
@@ -27,12 +28,9 @@ vvvvvvvvvvvvvv
 
 int	print_s(char *s)
 {
-	int	count;
-
-	count = 0;
-	while (*s)
-		count += print_c(*(s++));
-	return (count);
+	if (s == NULL)
+		return (write(1, "(null)", 6));
+	return (write(1, s, ft_strlen(s)));
 }
 
 int	process_specifier(char flag, va_list ap)
@@ -48,9 +46,9 @@ int	process_specifier(char flag, va_list ap)
 	else if (flag == 'u')
 		return (print_u(va_arg(ap, unsigned int)));
 	else if (flag == 'x')
-		return (print_both_x(va_arg(ap, int), 1));
+		return (print_hex(va_arg(ap, int), 1));
 	else if (flag == 'X')
-		return (print_both_x(va_arg(ap, int), 0));
+		return (print_hex(va_arg(ap, int), 0));
 	else if (flag == '%')
 		return (print_c((int)flag));
 	else

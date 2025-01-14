@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "printf.h"
+#include "ft_printf.h"
 
-int main(void)
+/*int main(void)
 {
     int ret;
 // ==============================
@@ -54,7 +54,7 @@ int main(void)
     printf("Return: %d (Expected: 1)\n", ret - 1); // Expected output: %
 
     return 0;
-}
+}*/
 
 
 
@@ -105,3 +105,22 @@ int main(void)
 	ft_printf("%%i test. with int min - 1 expected 2147483647 and return 23(with text)\n");
 	printf("Return : %d\n", ft_printf("Min int - 1 %d ", -2147483649));
 }*/
+
+
+int	main(void)
+{
+	int res;
+
+	res = ft_printf("%p", 0);
+	printf("\n%d", res);
+	res = ft_printf("%p", 15);
+	printf("\n%d", res);
+	res = ft_printf("%p %p", LONG_MIN, LONG_MAX);
+	printf("\n%d", res);
+	res = ft_printf("%p %p", ULONG_MAX, -ULONG_MAX);
+	printf("\n%d", res);
+
+	
+	
+	return (res);
+}

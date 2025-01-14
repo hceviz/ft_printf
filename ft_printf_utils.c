@@ -3,39 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hceviz <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:34:18 by hceviz            #+#    #+#             */
-/*   Updated: 2025/01/05 13:47:46 by hceviz           ###   ########.fr       */
+/*   Updated: 2025/01/13 16:21:02 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
-
+#include "ft_printf.h"
 //print_both_x has an int flag
 //which specify is it upper or lower case
 //it allows us to handle both case in one func
 // case_flag == 1 means that it is lower 0 means upper
 
 //check print_both_x when to return -1
+
+
 int	print_ptr(void *ptr)
 {
-	uintptr_t	num;
-	int			count;
+	unsigned long	num;
+	int				count;
 
+	num = (unsigned long)ptr;
 	if (!ptr)
-		return (-1);
-	num = (uintptr_t)ptr;
-	if (num == 0)
-		return (print_c('0'));
+		return (write(1, "(nil)", 5));
 	print_c('0');
 	print_c('x');
 	count = 2;
-	while (num > 0)
-	{
-		count += print_c("0123456789abcdef"[num % 16]);
-		num /= 16;
-	}
+	count += print_hex(num, 1);
 	return (count);
 }
 
@@ -50,7 +45,6 @@ int	print_c(int c)
 
 int	print_d_i(int num)
 {
-// control with max min int
 	char	*number;
 	int		count;
 
@@ -73,18 +67,21 @@ int	print_u(unsigned int num)
 }
 
 
-int	print_both_x(unsigned int num, unsigned int case_flag)
+int	print_hex(unsigned long num, unsigned int case_flag)
 {
-	char	*base;
-	int		written;
-
+	char			*base;
+	long			written;
+	unsigned long	number;
+	
 	written = 0;
+	number = (unsigned long)num;
 	if (case_flag == 1)
 		base = "0123456789abcdef";
 	else
 		base = "0123456789ABCDEF";
 	if (num >= 16)
-		written = print_both_x(num / 16, case_flag);
-	print_c(base[num % 16]);
+		written = print_hex(number / 16, case_flag);
+	print_c(base[number % 16]);
 	return (written + 1);
 }
+
