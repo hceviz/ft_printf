@@ -6,18 +6,18 @@
 /*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 10:34:18 by hceviz            #+#    #+#             */
-/*   Updated: 2025/01/13 16:21:02 by hceviz           ###   ########.fr       */
+/*   Updated: 2025/01/16 12:53:48 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//print_both_x has an int flag
-//which specify is it upper or lower case
-//it allows us to handle both case in one func
-// case_flag == 1 means that it is lower 0 means upper
-
-//check print_both_x when to return -1
-
+/*print_hex has case_flag parameter to avoid from
+creating two functions for up and low case
+=================================================
+pointer address might be bigger
+than int range that is why unsigned long
+unsigned long because we are working on
+memory unsigned provides pure address without sign*/
 
 int	print_ptr(void *ptr)
 {
@@ -27,10 +27,11 @@ int	print_ptr(void *ptr)
 	num = (unsigned long)ptr;
 	if (!ptr)
 		return (write(1, "(nil)", 5));
-	print_c('0');
-	print_c('x');
-	count = 2;
-	count += print_hex(num, 1);
+	count = write(1, "0x", 2);
+	if (num >= 16)
+		count += print_hex(num, 1);
+	else
+		count += print_hex(num, 1);
 	return (count);
 }
 
@@ -43,15 +44,31 @@ int	print_c(int c)
 	return (1);
 }
 
-int	print_d_i(int num)
+int	ft_putnbr(int num)
 {
-	char	*number;
 	int		count;
+	char	number;
 
 	count = 0;
-	number = ft_itoa(num);
-	count = print_s(number);
-	free(number);
+	if (num == -2147483648)
+		return (write(1, "-2147483648", 11));
+	if (num < 0)
+	{
+		write(1, "-", 1);
+		num *= -1;
+		count++;
+	}
+	if (num < 10)
+	{
+		number = num + '0';
+		write(1, &number, 1);
+		count++;
+	}
+	else
+	{
+		count += ft_putnbr(num / 10);
+		count += ft_putnbr(num % 10);
+	}
 	return (count);
 }
 
@@ -66,22 +83,18 @@ int	print_u(unsigned int num)
 	return (written);
 }
 
-
 int	print_hex(unsigned long num, unsigned int case_flag)
 {
 	char			*base;
 	long			written;
-	unsigned long	number;
-	
+
 	written = 0;
-	number = (unsigned long)num;
 	if (case_flag == 1)
 		base = "0123456789abcdef";
 	else
 		base = "0123456789ABCDEF";
 	if (num >= 16)
-		written = print_hex(number / 16, case_flag);
-	print_c(base[number % 16]);
+		written = print_hex(num / 16, case_flag);
+	print_c(base[num % 16]);
 	return (written + 1);
 }
-

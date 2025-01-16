@@ -6,16 +6,11 @@
 /*   By: hceviz <hceviz@student.42warsaw.pl>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:38:25 by hceviz            #+#    #+#             */
-/*   Updated: 2025/01/13 16:00:39 by hceviz           ###   ########.fr       */
+/*   Updated: 2025/01/15 19:04:58 by hceviz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-//#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <unistd.h>
-
 //be careful with argument promotion
 //promotion char to int
 // pointers cant be promoted
@@ -25,6 +20,16 @@ vvvvvvvvvvvvvv
  print_c(*s)
  s++;
  */
+
+int	ft_strlen(char *str)
+{
+	int	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
 
 int	print_s(char *s)
 {
@@ -36,7 +41,7 @@ int	print_s(char *s)
 int	process_specifier(char flag, va_list ap)
 {
 	if (flag == 'd' || flag == 'i')
-		return (print_d_i(va_arg(ap, int)));
+		return (ft_putnbr(va_arg(ap, int)));
 	else if (flag == 'c')
 		return (print_c(va_arg(ap, int)));
 	else if (flag == 's')
@@ -46,9 +51,9 @@ int	process_specifier(char flag, va_list ap)
 	else if (flag == 'u')
 		return (print_u(va_arg(ap, unsigned int)));
 	else if (flag == 'x')
-		return (print_hex(va_arg(ap, int), 1));
+		return (print_hex(va_arg(ap, unsigned int), 1));
 	else if (flag == 'X')
-		return (print_hex(va_arg(ap, int), 0));
+		return (print_hex(va_arg(ap, unsigned int), 0));
 	else if (flag == '%')
 		return (print_c((int)flag));
 	else
@@ -80,4 +85,3 @@ int	ft_printf(const char *flag, ...)
 	}
 	return (count);
 }
-
