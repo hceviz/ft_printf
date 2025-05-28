@@ -1,8 +1,4 @@
 # ft_printf
-
-## Project Overview
-Reimplementation of the C standard printf function with limited conversion specifiers, focusing on formatted output and low-level memory handling.
-
 ## Description
 The ft_printf project is a 42 School assignment aimed at recreating the functionality of the C standard printf function. It outputs formatted data to the standard output, handling a subset of format specifiers.
 
